@@ -3,41 +3,119 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Finance Tracker - Home</title>
+  <title>Finance Tracker</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      scroll-behavior: smooth;
+    }
+    .navbar {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    section {
+      padding: 60px 0;
+    }
+    .card {
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    #homeTotal {
+      color: #d9534f;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+  </style>
 </head>
 <body>
+
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
-    <div class="container-fluid px-4">
-      <a class="navbar-brand" href="index.html">Finance Tracker</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#home">Finance Tracker</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="add.html">Add Expense</a></li>
-          <li class="nav-item"><a class="nav-link" href="summary.html">Summary</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#add">Add Expense</a></li>
+          <li class="nav-item"><a class="nav-link" href="#summary">Summary</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Content -->
-  <div class="container mt-5">
+  <!-- Home Section -->
+  <section id="home" class="container mt-5 pt-5">
     <h1 class="text-center">Welcome to Personal Finance Tracker</h1>
     <p class="text-center">Track your daily expenses and stay in control of your money.</p>
-
-    <div class="card p-4 shadow-lg">
+    <div class="card p-4 mt-4">
       <h3>Your Total Expenses: ₹<span id="homeTotal">0</span></h3>
       <p><b>Name:</b> Anas Belim</p>
-      <p><b>Email ID:</b> anasbelim109@gmail.com</p>
+      <p><b>Email:</b> anasbelim109@gmail.com</p>
     </div>
-  </div>
+  </section>
+
+  <!-- Add Expense Section -->
+  <section id="add" class="container">
+    <h2 class="text-center">Add Expense</h2>
+    <div class="card p-4 mt-4">
+      <form id="expenseForm">
+        <div class="mb-3">
+          <label class="form-label">Expense Title</label>
+          <input type="text" id="title" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Amount (₹)</label>
+          <input type="number" id="amount" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Expense</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Summary Section -->
+  <section id="summary" class="container">
+    <h2 class="text-center">Expense Summary</h2>
+    <div class="card p-4 mt-4">
+      <ul id="expenseList" class="list-group"></ul>
+    </div>
+  </section>
+
+  <script>
+    let total = 0;
+    const homeTotal = document.getElementById("homeTotal");
+    const expenseForm = document.getElementById("expenseForm");
+    const expenseList = document.getElementById("expenseList");
+
+    expenseForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const title = document.getElementById("title").value;
+      const amount = parseFloat(document.getElementById("amount").value);
+
+      if (title && amount > 0) {
+        total += amount;
+        homeTotal.textContent = total;
+
+        const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.innerHTML = `${title} <span class="badge bg-danger">₹${amount}</span>`;
+        expenseList.appendChild(li);
+
+        expenseForm.reset();
+      }
+    });
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/main.js"></script>
 </body>
 </html>
