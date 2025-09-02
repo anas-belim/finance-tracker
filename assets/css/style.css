@@ -1,0 +1,50 @@
+/* assets/style.css */
+
+/* General body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar customization */
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Card styling */
+.card {
+  border-radius: 12px;
+  background: #ffffff;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Headings */
+h1, h3 {
+  color: #343a40;
+  font-weight: bold;
+}
+
+/* Paragraphs */
+p {
+  color: #555;
+}
+
+/* Centered container adjustments */
+.container {
+  max-width: 800px;
+}
+
+/* Highlighted expense value */
+#homeTotal {
+  color: #d9534f;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
